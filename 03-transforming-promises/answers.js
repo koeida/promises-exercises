@@ -69,7 +69,7 @@ function squarePromiseOrZero(promise){
  * @returns {Promise}
  */
 function switcheroo(promise){
-  return promise.then(yes => Promise.reject(yes), no => Promise.accept(no));
+  return promise.then(yes => Promise.reject(yes), no => Promise.resolve(no));
 }
 
 /**
