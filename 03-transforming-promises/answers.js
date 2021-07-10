@@ -32,7 +32,6 @@ function squarePromise(numberPromise){
                 if (converted === converted) {
                     return Promise.resolve(converted * converted);
                 } else {
-                    console.log("look: " + x);
                     return Promise.reject('Cannot convert \'' + x + '\' to a number!');
                 }
             }
@@ -46,6 +45,21 @@ function squarePromise(numberPromise){
  * @returns {Promise<number>}
  */
 function squarePromiseOrZero(promise){
+    return numberPromise
+        .then(x => {
+            if (typeof x === 'number') {
+                return Promise.resolve(x * x)
+            } else if (typeof x === 'string') {
+                var converted = Number(x);
+                if (converted === converted) {
+                    return Promise.resolve(converted * converted);
+                } else {
+                    console.log("look: " + x);
+                    return Promise.reject('Cannot convert \'' + x + '\' to a number!');
+                }
+            }
+        });
+
 }
 
 /**
