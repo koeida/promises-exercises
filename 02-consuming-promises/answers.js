@@ -7,7 +7,7 @@
  * 
  */
 function waitForPromise(promise, action){
-  /* IMPLEMENT ME */
+    return promise.then(action);
 }
 /**
  * 
@@ -18,7 +18,9 @@ function waitForPromise(promise, action){
  * @param {handler} handler 
  */
 function consumePromise(promise, consumer, handler){
-  /* IMPLEMENT ME! */
+    promise
+        .then(value => consumer(value))
+        .catch(error => handler(error))
 }
 
 /**

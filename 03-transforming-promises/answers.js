@@ -7,9 +7,11 @@
  * @returns {Promise}
  */
 function mapPromise(promise, transformer){
-  return new Promise((resolve, reject) => {
-    /* IMPLEMENT ME!! */
-  });
+  return new Promise((resolve, reject) => 
+    promise
+      .then(v => resolve(transformer(v)))
+      .catch(error => reject(error))
+  );
 }
 
 /**
