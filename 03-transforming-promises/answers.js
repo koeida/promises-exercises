@@ -7,11 +7,12 @@
  * @returns {Promise}
  */
 function mapPromise(promise, transformer){
-  return new Promise((resolve, reject) => 
-    promise
-      .then(v => resolve(transformer(v)))
-      .catch(error => reject(error))
-  );
+    return new Promise((resolve, reject) =>
+        promise
+            .then(transformer)
+            .then(resolve)
+            .catch(reject)
+    );
 }
 
 /**
@@ -22,9 +23,21 @@ function mapPromise(promise, transformer){
  * @returns {Promise<number>}
  */
 function squarePromise(numberPromise){
-  return numberPromise
-    .then(/* IMPLEMENT ME! */);
-}
+    return numberPromise
+        .then(x => {
+            if (typeof x === 'number') {
+                return Promise.resolve(x * x)
+            } else if (typeof x === 'string') {
+                var converted = Number(x);
+                if (converted === converted) {
+                    return Promise.resolve(converted * converted);
+                } else {
+                    console.log("look: " + x);
+                    return Promise.reject('Cannot convert \'' + x + '\' to a number!');
+                }
+            }
+        });
+} 
 
 /**
  * EXERCISE 3
@@ -33,8 +46,6 @@ function squarePromise(numberPromise){
  * @returns {Promise<number>}
  */
 function squarePromiseOrZero(promise){
-  return squarePromise(promise)
-    .catch(/* IMPLEMENT ME! */);
 }
 
 /**
