@@ -45,7 +45,7 @@ function squarePromise(numberPromise){
  * @returns {Promise<number>}
  */
 function squarePromiseOrZero(promise){
-    return numberPromise
+    return promise
         .then(x => {
             if (typeof x === 'number') {
                 return Promise.resolve(x * x)
@@ -54,11 +54,11 @@ function squarePromiseOrZero(promise){
                 if (converted === converted) {
                     return Promise.resolve(converted * converted);
                 } else {
-                    console.log("look: " + x);
-                    return Promise.reject('Cannot convert \'' + x + '\' to a number!');
+                    return Promise.resolve(0);
                 }
             }
-        });
+        })
+        .catch(_ => Promise.resolve(0));
 
 }
 
